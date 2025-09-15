@@ -2,19 +2,11 @@
 
 
 ![Build Status](https://github.com/autorope/donkeycar/actions/workflows/python-package-conda.yml/badge.svg?branch=main)
-![Lint Status](https://github.com/autorope/donkeycar/actions/workflows/superlinter.yml/badge.svg?branch=main)
-![Release](https://img.shields.io/github/v/release/autorope/donkeycar)
-
-
-[![All Contributors](https://img.shields.io/github/contributors/autorope/donkeycar)](#contributors-)
-![Issues](https://img.shields.io/github/issues/autorope/donkeycar)
-![Pull Requests](https://img.shields.io/github/issues-pr/autorope/donkeycar?)
 ![Forks](https://img.shields.io/github/forks/autorope/donkeycar)
-![Stars](https://img.shields.io/github/stars/autorope/donkeycar)
 ![License](https://img.shields.io/github/license/autorope/donkeycar)
 
-![Discord](https://img.shields.io/discord/662098530411741184.svg?logo=discord&colorB=7289DA)
 
+This Project is fork of the autoprobe Donkeycard project, to support the Waveshare Piracer/Jetracer AI Kit. 
 Donkeycar is minimalist and modular self driving library for Python. It is developed for hobbyists and students with a focus on allowing fast experimentation and easy community contributions.  It is being actively used at the high school and university level for learning and research.  It offers a [rich graphical interface](https://docs.donkeycar.com/utility/ui/) and includes a [simulator](https://docs.donkeycar.com/guide/deep_learning/simulator/) so you can experiment with self-driving even before you build a robot.
 
 #### Quick Links
