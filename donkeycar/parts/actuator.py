@@ -383,6 +383,91 @@ class PWMThrottle:
         self.run(0)
         self.running = False
 
+class PWMThrottle_WS:
+    """
+    Wrapper over a PWM pulse controller to convert -1 to 1 throttle
+    values to PWM pulses.
+    """
+    MIN_THROTTLE = -1
+    MAX_THROTTLE = 1
+
+    def __init__(self, controller, max_pulse, min_pulse, zero_pulse):
+
+        if controller is None:
+            raise ValueError("PWMThrottle requires a set_pulse controller to be passed")
+        set_pulse = getattr(controller, "set_pulse", None)
+        if set_pulse is None or not callable(set_pulse):
+            raise ValueError("controller must have a set_pulse method")
+
+        self.controller = controller
+        self.max_pulse = max_pulse
+        self.min_pulse = min_pulse
+        self.zero_pulse = zero_pulse
+        self.pulse = zero_pulse
+
+        # send zero pulse to calibrate ESC
+        logger.info("Init WS Motor")
+        self.controller.set_pulse(self.zero_pulse)
+        time.sleep(1)
+        self.running = True
+        logger.info('PWM Throttle created')
+
+    def update(self):
+        while self.running:
+            if self.pulse > 0:
+                self.controller.pwm.set_pwm(self.controller.channel,0,self.pulse)
+                self.controller.pwm.set_pwm(self.controller.channel+1,0,4095)
+                self.controller.pwm.set_pwm(self.controller.channel+2,0,0)
+                self.controller.pwm.set_pwm(self.controller.channel+3,0,0)
+                self.controller.pwm.set_pwm(self.controller.channel+4,0,self.pulse)
+                self.controller.pwm.set_pwm(self.controller.channel+7,0,self.pulse)
+                self.controller.pwm.set_pwm(self.controller.channel+6,0,4095)
+                self.controller.pwm.set_pwm(self.controller.channel+5,0,0)
+            else:
+                self.controller.pwm.set_pwm(self.controller.channel,0,- self.pulse)
+                self.controller.pwm.set_pwm(self.controller.channel+2,0,4095)
+                self.controller.pwm.set_pwm(self.controller.channel+1,0,0)
+                self.controller.pwm.set_pwm(self.controller.channel+3,0,- self.pulse)
+                self.controller.pwm.set_pwm(self.controller.channel+4,0,0)
+                self.controller.pwm.set_pwm(self.controller.channel+7,0,- self.pulse)
+                self.controller.pwm.set_pwm(self.controller.channel+5,0,4095)
+                self.controller.pwm.set_pwm(self.controller.channel+6,0,0)
+
+    def run_threaded(self, throttle):
+        throttle = utils.clamp(throttle, self.MIN_THROTTLE, self.MAX_THROTTLE)
+        if throttle > 0:
+            self.pulse = dk.utils.map_range(throttle, 0, self.MAX_THROTTLE,
+                                            self.zero_pulse, self.max_pulse)
+        else:
+            self.pulse = dk.utils.map_range(throttle, self.MIN_THROTTLE, 0,
+                                            self.min_pulse, self.zero_pulse)
+
+    def run(self, throttle):
+        self.run_threaded(throttle)
+        if self.pulse > 0:
+            self.controller.pwm.set_pwm(self.controller.channel,0,self.pulse)
+            self.controller.pwm.set_pwm(self.controller.channel+1,0,4095)
+            self.controller.pwm.set_pwm(self.controller.channel+2,0,0)
+            self.controller.pwm.set_pwm(self.controller.channel+3,0,0)
+            self.controller.pwm.set_pwm(self.controller.channel+4,0,self.pulse)
+            self.controller.pwm.set_pwm(self.controller.channel+7,0,self.pulse)
+            self.controller.pwm.set_pwm(self.controller.channel+6,0,4095)
+            self.controller.pwm.set_pwm(self.controller.channel+5,0,0)
+        else:
+            self.controller.pwm.set_pwm(self.controller.channel,0,- self.pulse)
+            self.controller.pwm.set_pwm(self.controller.channel+2,0,4095)
+            self.controller.pwm.set_pwm(self.controller.channel+1,0,0)
+            self.controller.pwm.set_pwm(self.controller.channel+3,0,- self.pulse)
+            self.controller.pwm.set_pwm(self.controller.channel+4,0,0)
+            self.controller.pwm.set_pwm(self.controller.channel+7,0,- self.pulse)
+            self.controller.pwm.set_pwm(self.controller.channel+5,0,4095)
+            self.controller.pwm.set_pwm(self.controller.channel+6,0,0)
+
+    def shutdown(self):
+        # stop vehicle
+        self.run(0)
+        self.running = False
+
 
 #
 # This seems redundant.  If it's really emulating and PCA9685, then

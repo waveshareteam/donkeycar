@@ -983,6 +983,29 @@ def add_drivetrain(V, cfg):
             V.add(steering, inputs=['steering'], threaded=True)
             V.add(throttle, inputs=['throttle'], threaded=True)
 
+        elif cfg.DRIVE_TRAIN_TYPE == "PWM_STEERING_THROTTLE_WS":
+            #
+            # drivetrain for Waveshare Racer.
+            # using a PwmPin for steering (servo)
+            # and as PCA9685 + TB6612  for throttle 
+            #
+            from donkeycar.parts.actuator import PCA9685, PWMSteering, PWMThrottle_WS
+
+            dt = cfg.PWM_STEERING_THROTTLE
+            steering_controller = PCA9685(dt["PWM_STEERING_PIN"], cfg.PCA9685_I2C_ADDR, busnum=cfg.PCA9685_I2C_BUSNUM)
+            steering = PWMSteering(controller=steering_controller,
+                                            left_pulse=dt["STEERING_LEFT_PWM"],
+                                            right_pulse=dt["STEERING_RIGHT_PWM"])
+
+            throttle_controller = PCA9685(dt["PWM_THROTTLE_PIN"], cfg.PCA9685_I2C_ADDR1, busnum=cfg.PCA9685_I2C_BUSNUM)
+            throttle = PWMThrottle_WS(controller=throttle_controller,
+                                                max_pulse=dt['THROTTLE_FORWARD_PWM'],
+                                                zero_pulse=dt['THROTTLE_STOPPED_PWM'],
+                                                min_pulse=dt['THROTTLE_REVERSE_PWM'])
+
+            V.add(steering, inputs=['steering'], threaded=True)
+            V.add(throttle, inputs=['throttle'], threaded=True)
+
         elif cfg.DRIVE_TRAIN_TYPE == "I2C_SERVO":
             #
             # This driver is DEPRECATED in favor of 'DRIVE_TRAIN_TYPE == "PWM_STEERING_THROTTLE"'
