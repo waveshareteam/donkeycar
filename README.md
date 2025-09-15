@@ -6,7 +6,7 @@
 ![License](https://img.shields.io/github/license/autorope/donkeycar)
 
 
-This Project is fork of the autoprobe Donkeycard project, to support the Waveshare Piracer/Jetracer AI Kit. 
+This Project is fork of the autoprobe Donkeycar project, to support the Waveshare Piracer/Jetracer AI Kit. 
 Donkeycar is minimalist and modular self driving library for Python. It is developed for hobbyists and students with a focus on allowing fast experimentation and easy community contributions.  It is being actively used at the high school and university level for learning and research.  It offers a [rich graphical interface](https://docs.donkeycar.com/utility/ui/) and includes a [simulator](https://docs.donkeycar.com/guide/deep_learning/simulator/) so you can experiment with self-driving even before you build a robot.
 
 #### Quick Links
