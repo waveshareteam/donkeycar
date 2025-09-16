@@ -121,10 +121,10 @@ PWM_STEERING_THROTTLE_WS = {
 #
 # I2C_SERVO (deprecated in favor of PWM_STEERING_THROTTLE)
 #
-STEERING_CHANNEL = 1            #(deprecated) channel on the 9685 pwm board 0-15
+STEERING_CHANNEL = 0            #(deprecated) channel on the 9685 pwm board 0-15
 STEERING_LEFT_PWM = 160         #pwm value for full left steering
 STEERING_RIGHT_PWM = 600        #pwm value for full right steering
-THROTTLE_CHANNEL = 0            #(deprecated) channel on the 9685 pwm board 0-15
+THROTTLE_CHANNEL = 1            #(deprecated) channel on the 9685 pwm board 0-15
 THROTTLE_FORWARD_PWM = 4096      #pwm value for max forward throttle
 THROTTLE_STOPPED_PWM = 0      #pwm value for no movement
 THROTTLE_REVERSE_PWM = -4096      #pwm value for max reverse throttle
