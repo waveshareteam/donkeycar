@@ -991,17 +991,16 @@ def add_drivetrain(V, cfg):
             #
             from donkeycar.parts.actuator import PCA9685, PWMSteering, PWMThrottle_WS
 
-            dt = cfg.PWM_STEERING_THROTTLE
-            steering_controller = PCA9685(dt["PWM_STEERING_PIN"], cfg.PCA9685_I2C_ADDR, busnum=cfg.PCA9685_I2C_BUSNUM)
+            steering_controller = PCA9685(cfg.STEERING_CHANNEL, cfg.PCA9685_I2C_ADDR, busnum=cfg.PCA9685_I2C_BUSNUM)
             steering = PWMSteering(controller=steering_controller,
-                                            left_pulse=dt["STEERING_LEFT_PWM"],
-                                            right_pulse=dt["STEERING_RIGHT_PWM"])
+                                            left_pulse=cfg.STEERING_LEFT_PWM,
+                                            right_pulse=cfg.STEERING_RIGHT_PWM)
 
-            throttle_controller = PCA9685(dt["PWM_THROTTLE_PIN"], cfg.PCA9685_I2C_ADDR1, busnum=cfg.PCA9685_I2C_BUSNUM)
+            throttle_controller = PCA9685(cfg.THROTTLE_CHANNEL, cfg.PCA9685_I2C_ADDR1, busnum=cfg.PCA9685_I2C_BUSNUM)
             throttle = PWMThrottle_WS(controller=throttle_controller,
-                                                max_pulse=dt['THROTTLE_FORWARD_PWM'],
-                                                zero_pulse=dt['THROTTLE_STOPPED_PWM'],
-                                                min_pulse=dt['THROTTLE_REVERSE_PWM'])
+                                                max_pulse=cfg.THROTTLE_FORWARD_PWM,
+                                            zero_pulse=cfg.THROTTLE_STOPPED_PWM,
+                                            min_pulse=cfg.THROTTLE_REVERSE_PWM)
 
             V.add(steering, inputs=['steering'], threaded=True)
             V.add(throttle, inputs=['throttle'], threaded=True)
