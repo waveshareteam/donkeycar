@@ -415,16 +415,6 @@ class PWMThrottle_WS:
     def update(self):
         while self.running:
             if self.pulse > 0:
-                self.controller.pwm.set_pwm(self.controller.channel,0,- self.pulse)
-                self.controller.pwm.set_pwm(self.controller.channel+2,0,4095)
-                self.controller.pwm.set_pwm(self.controller.channel+1,0,0)
-                self.controller.pwm.set_pwm(self.controller.channel+3,0,- self.pulse)
-                self.controller.pwm.set_pwm(self.controller.channel+4,0,0)
-                self.controller.pwm.set_pwm(self.controller.channel+7,0,- self.pulse)
-                self.controller.pwm.set_pwm(self.controller.channel+5,0,4095)
-                self.controller.pwm.set_pwm(self.controller.channel+6,0,0)
-            else:
-
                 self.controller.pwm.set_pwm(self.controller.channel,0,self.pulse)
                 self.controller.pwm.set_pwm(self.controller.channel+1,0,4095)
                 self.controller.pwm.set_pwm(self.controller.channel+2,0,0)
@@ -433,6 +423,15 @@ class PWMThrottle_WS:
                 self.controller.pwm.set_pwm(self.controller.channel+7,0,self.pulse)
                 self.controller.pwm.set_pwm(self.controller.channel+6,0,4095)
                 self.controller.pwm.set_pwm(self.controller.channel+5,0,0)
+            else:
+                self.controller.pwm.set_pwm(self.controller.channel,0,- self.pulse)
+                self.controller.pwm.set_pwm(self.controller.channel+2,0,4095)
+                self.controller.pwm.set_pwm(self.controller.channel+1,0,0)
+                self.controller.pwm.set_pwm(self.controller.channel+3,0,- self.pulse)
+                self.controller.pwm.set_pwm(self.controller.channel+4,0,0)
+                self.controller.pwm.set_pwm(self.controller.channel+7,0,- self.pulse)
+                self.controller.pwm.set_pwm(self.controller.channel+5,0,4095)
+                self.controller.pwm.set_pwm(self.controller.channel+6,0,0)
 
     def run_threaded(self, throttle):
         throttle = utils.clamp(throttle, self.MIN_THROTTLE, self.MAX_THROTTLE)
@@ -446,16 +445,6 @@ class PWMThrottle_WS:
     def run(self, throttle):
         self.run_threaded(throttle)
         if self.pulse > 0:
-            self.controller.pwm.set_pwm(self.controller.channel,0,- self.pulse)
-            self.controller.pwm.set_pwm(self.controller.channel+2,0,4095)
-            self.controller.pwm.set_pwm(self.controller.channel+1,0,0)
-            self.controller.pwm.set_pwm(self.controller.channel+3,0,- self.pulse)
-            self.controller.pwm.set_pwm(self.controller.channel+4,0,0)
-            self.controller.pwm.set_pwm(self.controller.channel+7,0,- self.pulse)
-            self.controller.pwm.set_pwm(self.controller.channel+5,0,4095)
-            self.controller.pwm.set_pwm(self.controller.channel+6,0,0)
-
-        else:
             self.controller.pwm.set_pwm(self.controller.channel,0,self.pulse)
             self.controller.pwm.set_pwm(self.controller.channel+1,0,4095)
             self.controller.pwm.set_pwm(self.controller.channel+2,0,0)
@@ -464,7 +453,15 @@ class PWMThrottle_WS:
             self.controller.pwm.set_pwm(self.controller.channel+7,0,self.pulse)
             self.controller.pwm.set_pwm(self.controller.channel+6,0,4095)
             self.controller.pwm.set_pwm(self.controller.channel+5,0,0)
-        
+        else:
+            self.controller.pwm.set_pwm(self.controller.channel,0,- self.pulse)
+            self.controller.pwm.set_pwm(self.controller.channel+2,0,4095)
+            self.controller.pwm.set_pwm(self.controller.channel+1,0,0)
+            self.controller.pwm.set_pwm(self.controller.channel+3,0,- self.pulse)
+            self.controller.pwm.set_pwm(self.controller.channel+4,0,0)
+            self.controller.pwm.set_pwm(self.controller.channel+7,0,- self.pulse)
+            self.controller.pwm.set_pwm(self.controller.channel+5,0,4095)
+            self.controller.pwm.set_pwm(self.controller.channel+6,0,0)
 
     def shutdown(self):
         # stop vehicle

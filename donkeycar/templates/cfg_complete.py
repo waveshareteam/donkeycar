@@ -111,7 +111,7 @@ PWM_STEERING_THROTTLE_WS = {
     "PWM_STEERING_INVERTED": False,         # True if hardware requires an inverted PWM pulse
     "PWM_THROTTLE_PIN": 0,   # PWM output pin for ESC
     "PWM_THROTTLE_SCALE": 1.0,              # used to compensate for PWM frequence differences from 60hz; NOT for increasing/limiting speed
-    "PWM_THROTTLE_INVERTED": True,         # True if hardware requires an inverted PWM pulse
+    "PWM_THROTTLE_INVERTED": False,         # True if hardware requires an inverted PWM pulse
     "STEERING_LEFT_PWM": 160,               #pwm value for full left steering
     "STEERING_RIGHT_PWM": 600,              #pwm value for full right steering
     "THROTTLE_FORWARD_PWM": 4095,            #pwm value for max forward throttle
