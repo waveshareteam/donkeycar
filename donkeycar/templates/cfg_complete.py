@@ -105,17 +105,19 @@ PWM_STEERING_THROTTLE = {
 #
 
 PWM_STEERING_THROTTLE_WS = {
+    "STEERING_ADDR": "0x40",               # I2C address for steering PCA9685
+    "THROTTLE_ADDR": "0x60",               # I2C address for throttle PCA9685+TB6612FNG
     "PWM_STEERING_PIN": "0",   # PWM output pin for steering servo
     "PWM_STEERING_SCALE": 1.0,              # used to compensate for PWM frequency differents from 60hz; NOT for adjusting steering range
     "PWM_STEERING_INVERTED": False,         # True if hardware requires an inverted PWM pulse
-    "PWM_THROTTLE_PIN": "0",   # PWM output pin for ESC
+    "PWM_THROTTLE_PIN": "1",   # PWM output pin for ESC
     "PWM_THROTTLE_SCALE": 1.0,              # used to compensate for PWM frequence differences from 60hz; NOT for increasing/limiting speed
     "PWM_THROTTLE_INVERTED": True,         # True if hardware requires an inverted PWM pulse
-    "STEERING_LEFT_PWM": 460,               #pwm value for full left steering
-    "STEERING_RIGHT_PWM": 300,              #pwm value for full right steering
-    "THROTTLE_FORWARD_PWM": 500,            #pwm value for max forward throttle
+    "STEERING_LEFT_PWM": 160,               #pwm value for full left steering
+    "STEERING_RIGHT_PWM": 600,              #pwm value for full right steering
+    "THROTTLE_FORWARD_PWM": 4095,            #pwm value for max forward throttle
     "THROTTLE_STOPPED_PWM": 0,            #pwm value for no movement
-    "THROTTLE_REVERSE_PWM": 220,            #pwm value for max reverse throttle
+    "THROTTLE_REVERSE_PWM": -4095,            #pwm value for max reverse throttle
 }
 
 #
