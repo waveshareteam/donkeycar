@@ -444,7 +444,7 @@ class PWMThrottle_WS:
 
     def run(self, throttle):
         self.run_threaded(throttle)
-        if self.throttle > 0:
+        if self.pulse > 0:
             self.controller.pwm.set_pwm(self.controller.channel,0,self.pulse)
             self.controller.pwm.set_pwm(self.controller.channel+1,0,4095)
             self.controller.pwm.set_pwm(self.controller.channel+2,0,0)
