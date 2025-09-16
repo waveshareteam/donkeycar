@@ -110,11 +110,11 @@ PWM_STEERING_THROTTLE_WS = {
     "PWM_STEERING_INVERTED": False,         # True if hardware requires an inverted PWM pulse
     "PWM_THROTTLE_PIN": "0",   # PWM output pin for ESC
     "PWM_THROTTLE_SCALE": 1.0,              # used to compensate for PWM frequence differences from 60hz; NOT for increasing/limiting speed
-    "PWM_THROTTLE_INVERTED": False,         # True if hardware requires an inverted PWM pulse
+    "PWM_THROTTLE_INVERTED": True,         # True if hardware requires an inverted PWM pulse
     "STEERING_LEFT_PWM": 460,               #pwm value for full left steering
-    "STEERING_RIGHT_PWM": 290,              #pwm value for full right steering
+    "STEERING_RIGHT_PWM": 300,              #pwm value for full right steering
     "THROTTLE_FORWARD_PWM": 500,            #pwm value for max forward throttle
-    "THROTTLE_STOPPED_PWM": 370,            #pwm value for no movement
+    "THROTTLE_STOPPED_PWM": 0,            #pwm value for no movement
     "THROTTLE_REVERSE_PWM": 220,            #pwm value for max reverse throttle
 }
 
@@ -122,12 +122,12 @@ PWM_STEERING_THROTTLE_WS = {
 # I2C_SERVO (deprecated in favor of PWM_STEERING_THROTTLE)
 #
 STEERING_CHANNEL = 1            #(deprecated) channel on the 9685 pwm board 0-15
-STEERING_LEFT_PWM = 460         #pwm value for full left steering
-STEERING_RIGHT_PWM = 290        #pwm value for full right steering
+STEERING_LEFT_PWM = 160         #pwm value for full left steering
+STEERING_RIGHT_PWM = 600        #pwm value for full right steering
 THROTTLE_CHANNEL = 0            #(deprecated) channel on the 9685 pwm board 0-15
-THROTTLE_FORWARD_PWM = 500      #pwm value for max forward throttle
-THROTTLE_STOPPED_PWM = 370      #pwm value for no movement
-THROTTLE_REVERSE_PWM = 220      #pwm value for max reverse throttle
+THROTTLE_FORWARD_PWM = 4096      #pwm value for max forward throttle
+THROTTLE_STOPPED_PWM = 0      #pwm value for no movement
+THROTTLE_REVERSE_PWM = -4096      #pwm value for max reverse throttle
 
 #
 # PIGPIO_PWM (deprecated in favor of PWM_STEERING_THROTTLE)
